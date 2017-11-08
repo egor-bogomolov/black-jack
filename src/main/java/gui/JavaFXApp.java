@@ -11,8 +11,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class JavaFXApp extends Application {
-    static private final int MIN_WIDTH = 320;
-    static private final int MIN_HEIGHT = 480;
+    private static final int MIN_WIDTH = 320;
+    private static final int MIN_HEIGHT = 480;
     private static final Image cards = new Image("cards.png");
     private static final double cardImageWidth = cards.getWidth() / 13;
     private static final double cardImageHeight = cards.getHeight() / 4;
@@ -38,20 +38,19 @@ public class JavaFXApp extends Application {
         takeButton = new Button("TAKE");
         passButton = new Button("PASS");
 
-        canvas = new Canvas();
-
+        canvas = new Canvas(MIN_WIDTH, MIN_HEIGHT);
 
         rootLayout = new BorderPane();
         rootLayout.setCenter(canvas);
         rootLayout.setLeft(takeButton);
         rootLayout.setRight(passButton);
 
+        redrawCards();
+
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
-
         primaryStage.show();
     }
-
 
     private void drawCard(Card card, double offsetX, double offsetY, double width, double height) {
         canvas.getGraphicsContext2D().drawImage(

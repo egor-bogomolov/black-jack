@@ -28,10 +28,10 @@ public class GameSession {
         deck = new Deck();
         playersCards = new ArrayList<>();
         dealersCards = new ArrayList<>();
-        playersCards.add(deck.getCard());
-        dealersCards.add(deck.getCard());
-        playersCards.add(deck.getCard());
-        dealersCards.add(deck.getCard());
+        takeCard(PLAYER);
+        takeCard(DEALER);
+        takeCard(PLAYER);
+        takeCard(DEALER);
     }
 
     public Turn getTurn() {
