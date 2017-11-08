@@ -17,23 +17,14 @@ public final class Card implements Serializable {
         JACK(2),
         QUEEN(3),
         KING(4),
-        ACE(11) {
-            @Override
-            public int getPoints(int sum) {
-                if (sum + 11 > 21) {
-                    return 1;
-                } else {
-                    return 11;
-                }
-            }
-        };
+        ACE(11);
 
         private int points;
         Value(int points) {
             this.points = points;
         }
 
-        public int getPoints(int sum) {
+        public int getPoints() {
             return points;
         }
     }
@@ -57,8 +48,8 @@ public final class Card implements Serializable {
         return suit;
     }
 
-    public int getPoints(int sum) {
-        return value.getPoints(sum);
+    public int getPoints() {
+        return value.getPoints();
     }
 
     public Value getValue() {

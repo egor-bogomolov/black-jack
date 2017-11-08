@@ -60,10 +60,10 @@ public class GameSession {
         Card card = deck.getCard();
         if (turn == PLAYER) {
             playersCards.add(card);
-            playersPoints += card.getPoints(playersPoints);
+            playersPoints = computePoints(playersCards);
         } else {
             dealersCards.add(card);
-            dealersPoints += card.getPoints(dealersPoints);
+            dealersPoints = computePoints(dealersCards);
         }
     }
 
@@ -81,6 +81,26 @@ public class GameSession {
         if (playersPoints > dealersPoints)
             return PLAYER;
         return DEALER;
+    }
+
+    public static int computePoints(List<Card> cards) {
+        int aces = 0;
+        int points = 0;
+        for (Card card : cards) {
+            if (card.getValue() == Card.Value.ACE) {
+                aces++;
+            } else {
+                points += card.getPoints();
+            }
+        }
+        for (int i = 0; i < aces; i++) {
+            if (points + (aces - i - 1) + 11 > 21) {
+                points++;
+            } else {
+                points += 11;
+            }
+        }
+        return points;
     }
 
 }
