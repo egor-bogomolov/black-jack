@@ -2,13 +2,14 @@ package game;
 
 import cards.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
 
     private APIClient server;
     private boolean finished = false;
-    private List<Card> myCards;
+    private List<Card> myCards = new ArrayList<>();
     private int myPoints = 0;
 
     public Client(APIClient server) {
