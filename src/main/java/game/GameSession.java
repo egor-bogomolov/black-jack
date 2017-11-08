@@ -5,38 +5,25 @@ import cards.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static game.GameSession.Turn.DEALER;
 import static game.GameSession.Turn.PLAYER;
 
 public class GameSession {
-    public enum Turn {
-        PLAYER,
-        DEALER
-    }
-
-    private Turn turn;
     private final Deck deck;
-    private final List<Card> playersCards;
-    private final List<Card> dealersCards;
+    private final List<List<Card>> playersCards;
     private boolean isFinished = false;
     private int playersPoints;
     private int dealersPoints;
 
     public GameSession() {
-        turn = PLAYER;
         deck = new Deck();
         playersCards = new ArrayList<>();
-        dealersCards = new ArrayList<>();
         playersCards.add(deck.getCard());
-        dealersCards.add(deck.getCard());
         playersCards.add(deck.getCard());
-        dealersCards.add(deck.getCard());
     }
 
-    public Turn getTurn() {
-        return turn;
-    }
 
     public List<Card> getCards(Turn turn) {
         if (turn == PLAYER)
@@ -56,15 +43,10 @@ public class GameSession {
         takeCard(PLAYER);
     }
 
-    private void takeCard(Turn turn) {
+    private void takeCard(int id) {
         Card card = deck.getCard();
-        if (turn == PLAYER) {
-            playersCards.add(card);
-            playersPoints += card.getPoints(playersPoints);
-        } else {
-            dealersCards.add(card);
-            dealersPoints += card.getPoints(dealersPoints);
-        }
+        playersCards.get(id).add(card);
+        playersPoints += card.getPoints(playersPoints);
     }
 
     public void playAsDealer() {
@@ -82,5 +64,4 @@ public class GameSession {
             return PLAYER;
         return DEALER;
     }
-
 }
