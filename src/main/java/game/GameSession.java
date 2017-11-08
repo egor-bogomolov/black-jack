@@ -9,15 +9,10 @@ import java.util.List;
 import static game.GameSession.Turn.DEALER;
 import static game.GameSession.Turn.PLAYER;
 
-public class GameSession {
-    public enum Turn {
-        PLAYER,
-        DEALER
-    }
-
-    private Turn turn;
+public class GameSession  {
+    private int turn;
     private final Deck deck;
-    private final List<Card> playersCards;
+    private final List<List<Card>> playersCards;
     private final List<Card> dealersCards;
     private boolean isFinished = false;
     private int playersPoints;

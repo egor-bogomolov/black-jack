@@ -1,13 +1,17 @@
 package game;
 
+import cards.Card;
+
 import java.io.Serializable;
 
 public final class State implements Serializable {
-    public int[] cardCnts;
+    public Card[][] cards;
+    public Card[] dealerCards;
     public boolean myTurn;
+    public boolean finished;
 
-    State(int[] cardCnts, boolean myTurn) {
-        this.cardCnts = cardCnts;
+    State(Card[][] cards, boolean myTurn) {
+        this.cards = cards;
         this.myTurn = myTurn;
     }
 
