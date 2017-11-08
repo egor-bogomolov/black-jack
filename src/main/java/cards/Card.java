@@ -1,6 +1,6 @@
 package cards;
 
-public class Card {
+public final class Card {
 
     public enum Value {
         TWO(2),
@@ -70,8 +70,7 @@ public class Card {
 
         Card card = (Card) o;
 
-        if (suit != card.suit) return false;
-        return value == card.value;
+        return suit == card.suit && value == card.value;
     }
 
     @Override
