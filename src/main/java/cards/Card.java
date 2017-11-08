@@ -1,8 +1,10 @@
 package cards;
 
-public final class Card {
+import java.io.Serializable;
 
-    public enum Value {
+public final class Card implements Serializable {
+
+    public enum Value implements Serializable {
         TWO(2),
         THREE(3),
         FOUR(4),
@@ -36,7 +38,7 @@ public final class Card {
         }
     }
 
-    public enum Suit {
+    public enum Suit implements Serializable {
         HEARTS,
         DIAMONDS,
         CLUBS,

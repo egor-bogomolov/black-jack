@@ -1,9 +1,9 @@
 package game;
 
 public class Client {
-    private Server server;
+    private APIClient server;
 
-    public Client(Server server) {
+    public Client(APIClient server) {
 
 
     }
