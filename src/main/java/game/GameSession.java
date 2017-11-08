@@ -2,7 +2,6 @@ package game;
 
 import cards.Card;
 import cards.Deck;
-import cards.DeckIsEmptyException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class GameSession {
     private int playersPoints;
     private int dealersPoints;
 
-    public GameSession() throws DeckIsEmptyException {
+    public GameSession() {
         turn = PLAYER;
         deck = new Deck();
         playersCards = new ArrayList<>();
@@ -53,11 +52,11 @@ public class GameSession {
         return playersPoints;
     }
 
-    public void takeCard() throws DeckIsEmptyException {
+    public void takeCard() {
         takeCard(PLAYER);
     }
 
-    private void takeCard(Turn turn) throws DeckIsEmptyException {
+    private void takeCard(Turn turn) {
         Card card = deck.getCard();
         if (turn == PLAYER) {
             playersCards.add(card);
@@ -68,7 +67,7 @@ public class GameSession {
         }
     }
 
-    public void playAsDealer() throws DeckIsEmptyException {
+    public void playAsDealer() {
         while (dealersPoints < 17)
             takeCard(DEALER);
         isFinished = true;

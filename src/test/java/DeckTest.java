@@ -1,6 +1,5 @@
 import cards.Card;
 import cards.Deck;
-import cards.DeckIsEmptyException;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -12,7 +11,7 @@ import static junit.framework.TestCase.assertNotNull;
 public class DeckTest {
 
     @Test
-    public void getCard() throws DeckIsEmptyException {
+    public void getCard() {
         Card card = new Deck().getCard();
         assertNotNull(card);
         assertNotNull(card.getSuit());
@@ -20,7 +19,7 @@ public class DeckTest {
     }
 
     @Test
-    public void differentCards() throws DeckIsEmptyException {
+    public void differentCards() {
         Set<Card> cards = new HashSet<>();
         Deck deck = new Deck();
         for (int i = 0; i < 52; i++) {
@@ -29,11 +28,4 @@ public class DeckTest {
         assertEquals(52, cards.size());
     }
 
-    @Test(expected = DeckIsEmptyException.class)
-    public void isEmpty() throws DeckIsEmptyException {
-        Deck deck = new Deck();
-        for (int i = 0; i < 53; i++) {
-            deck.getCard();
-        }
-    }
 }

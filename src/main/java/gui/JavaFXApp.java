@@ -1,7 +1,6 @@
 package gui;
 
 import cards.Card;
-import cards.DeckIsEmptyException;
 import game.GameSession;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -22,7 +21,7 @@ public class JavaFXApp extends Application {
     private BorderPane rootLayout;
     private Canvas canvas;
     private Button takeButton, passButton;
-    private GameSession gameSession = new GameSession(0);
+    private GameSession gameSession = new GameSession();
 
     public static void main(String[] args) {
         launch(args);

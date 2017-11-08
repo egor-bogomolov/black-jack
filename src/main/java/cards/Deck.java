@@ -19,10 +19,7 @@ public class Deck {
         Collections.shuffle(cards, new Random(228));
     }
 
-    public Card getCard() throws DeckIsEmptyException {
-        if (position >= cards.size()) {
-            throw new DeckIsEmptyException();
-        }
+    public Card getCard() {
         return cards.get(position++);
     }
 }
