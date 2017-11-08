@@ -3,19 +3,37 @@ package cards;
 public class Card {
 
     public enum Value {
-        TWO,
-        THREE,
-        FOUR,
-        FIVE,
-        SIX,
-        SEVEN,
-        EIGHT,
-        NINE,
-        TEN,
-        JACK,
-        QUEEN,
-        KING,
-        ACE
+        TWO(2),
+        THREE(3),
+        FOUR(4),
+        FIVE(5),
+        SIX(6),
+        SEVEN(7),
+        EIGHT(8),
+        NINE(9),
+        TEN(10),
+        JACK(2),
+        QUEEN(3),
+        KING(4),
+        ACE(11) {
+            @Override
+            public int getPoints(int sum) {
+                if (sum + 11 > 21) {
+                    return 1;
+                } else {
+                    return 11;
+                }
+            }
+        };
+
+        private int points;
+        Value(int points) {
+            this.points = points;
+        }
+
+        public int getPoints(int sum) {
+            return points;
+        }
     }
 
     public enum Suit {
@@ -37,38 +55,8 @@ public class Card {
         return suit;
     }
 
-    public int getPoints(int points) {
-        switch (value) {
-            case TWO:
-                return 2;
-            case THREE:
-                return 3;
-            case FOUR:
-                return 4;
-            case FIVE:
-                return 5;
-            case SIX:
-                return 6;
-            case SEVEN:
-                return 7;
-            case EIGHT:
-                return 8;
-            case NINE:
-                return 9;
-            case TEN:
-                return 10;
-            case JACK:
-                return 2;
-            case QUEEN:
-                return 3;
-            case KING:
-                return 4;
-            case ACE:
-                if (points + 11 > 21) return 1;
-                return 11;
-            default:
-                throw new UnsupportedOperationException("Broken card.");
-        }
+    public int getPoints(int sum) {
+        return value.getPoints(sum);
     }
 
     public Value getValue() {
