@@ -9,19 +9,19 @@ public class CardsTest {
     @Test
     public void getPoints() {
         Card card = new Card(Card.Value.JACK, Card.Suit.DIAMONDS);
-        assertTrue(card.getPoints(12) == 2);
+        assertTrue(card.getPoints() == 2);
         card = new Card(Card.Value.TWO, Card.Suit.HEARTS);
-        assertTrue(card.getPoints(2) == 2);
+        assertTrue(card.getPoints() == 2);
         card = new Card(Card.Value.TEN, Card.Suit.CLUBS);
-        assertTrue(card.getPoints(3) == 10);
+        assertTrue(card.getPoints() == 10);
         card = new Card(Card.Value.TEN, Card.Suit.HEARTS);
-        assertTrue(card.getPoints(5) == 10);
+        assertTrue(card.getPoints() == 10);
         card = new Card(Card.Value.NINE, Card.Suit.SPADES);
-        assertTrue(card.getPoints(17) == 9);
+        assertTrue(card.getPoints() == 9);
         card = new Card(Card.Value.QUEEN, Card.Suit.DIAMONDS);
-        assertTrue(card.getPoints(123) == 3);
+        assertTrue(card.getPoints() == 3);
         card = new Card(Card.Value.KING, Card.Suit.HEARTS);
-        assertTrue(card.getPoints(92) == 4);
+        assertTrue(card.getPoints() == 4);
     }
 
     @Test
@@ -42,16 +42,6 @@ public class CardsTest {
         assertTrue(card.getValue() == Card.Value.JACK);
         card = new Card(Card.Value.QUEEN, Card.Suit.DIAMONDS);
         assertTrue(card.getValue() == Card.Value.QUEEN);
-    }
-
-    @Test
-    public void getAcePoints() {
-        Card card = new Card(Card.Value.ACE, Card.Suit.SPADES);
-        assertTrue(card.getPoints(0) == 11);
-        assertTrue(card.getPoints(5) == 11);
-        assertTrue(card.getPoints(10) == 11);
-        assertTrue(card.getPoints(11) == 1);
-        assertTrue(card.getPoints(20) == 1);
     }
 
     @Test
