@@ -6,20 +6,17 @@ import java.io.Serializable;
 
 public final class State implements Serializable {
     public Card[][] cards;
-    public Card[] dealerCards;
-    public boolean myTurn;
-    public boolean finished;
-
-    State(Card[][] cards, boolean myTurn) {
-        this.cards = cards;
-        this.myTurn = myTurn;
-    }
+    public Card[] openDealerCards;
+    public int currentTurn;
+    // -1 indicates that the game is going on
+    public int winner = -1;
 
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof State)) return false;
 
         State other = (State) obj;
-        return myTurn == other.myTurn && java.util.Arrays.equals(cardCnts, other.cardCnts);
+        // TODO(atonkikh)
+        return true;
     }
 }
