@@ -16,7 +16,7 @@ public class Deck {
                 cards.add(new Card(value, suit));
             }
         }
-        Collections.shuffle(cards, new Random(228));
+        Collections.shuffle(cards, new Random(System.currentTimeMillis()));
     }
 
     public Card getCard() {
