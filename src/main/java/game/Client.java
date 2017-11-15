@@ -15,11 +15,12 @@ public class Client {
         return boardState.hasFinished();
     }
 
-    public void takeCard() throws IOException, ClassNotFoundException {
+    public State takeCard() throws IOException, ClassNotFoundException {
         boardState = server.take();
         if (boardState.getMyPoints() >= 21) {
             stopPlayingAndWait();
         }
+        return boardState;
     }
 
     public void stopPlayingAndWait() throws IOException, ClassNotFoundException {
@@ -27,9 +28,16 @@ public class Client {
         while(!hasFinished()) {
             getStateUpdate();
         }
+        server.close();
     }
 
     private void getStateUpdate() throws IOException, ClassNotFoundException {
         boardState = server.nextEvent();
     }
+
+    public State connect() throws IOException, ClassNotFoundException {
+        boardState = server.connect();
+        return boardState;
+    }
+
 }
