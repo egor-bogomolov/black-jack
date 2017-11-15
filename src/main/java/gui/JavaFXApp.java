@@ -12,11 +12,7 @@ import javafx.stage.Stage;
 public class JavaFXApp extends Application {
     private static final int MIN_WIDTH = 320;
     private static final int MIN_HEIGHT = 480;
-
-    private Stage primaryStage;
-    private BorderPane rootLayout;
-    private FieldCanvas field;
-    private Button takeButton, passButton;
+    private static final int BUTTON_SPACING = 12;
 
     public static void main(String[] args) {
         launch(args);
@@ -24,33 +20,43 @@ public class JavaFXApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Blackjack");
+        primaryStage.setTitle("Blackjack");
 
         primaryStage.setMinWidth(MIN_WIDTH);
         primaryStage.setMinHeight(MIN_HEIGHT);
-
-        field = new FieldCanvas(MIN_WIDTH, MIN_HEIGHT);
-
-        takeButton = new Button("TAKE");
-        takeButton.setOnAction(e -> field.playerTurnTake());
-        passButton = new Button("PASS");
-        takeButton.setOnAction(e -> field.playerTurnPass());
-
-        HBox buttonHorizontalBox = new HBox(10, takeButton, passButton);
-        buttonHorizontalBox.setAlignment(Pos.CENTER);
-        HBox.setHgrow(takeButton, Priority.ALWAYS);
-        HBox.setHgrow(passButton, Priority.ALWAYS);
-        takeButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        passButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-        rootLayout = new BorderPane();
-        rootLayout.setTop(buttonHorizontalBox);
-        rootLayout.setCenter(field);
-
-        Scene scene = new Scene(rootLayout, MIN_WIDTH, MIN_HEIGHT);
+        Scene scene = buildScene();
         primaryStage.setScene(scene);
 
         primaryStage.show();
+    }
+
+    private static Scene buildScene() {
+        final FieldCanvas canvas = new FieldCanvas(MIN_WIDTH, MIN_HEIGHT);
+
+        final Button takeButton = new Button("TAKE");
+        takeButton.setDisable(true);
+        takeButton.setOnAction(e -> canvas.playerTurnTake());
+
+        final Button passButton = new Button("PASS");
+        passButton.setDisable(true);
+        takeButton.setOnAction(e -> canvas.playerTurnPass());
+
+        final Button connectToServerButton = new Button("CONNECT");
+
+        HBox buttonHorizontalBox = new HBox(BUTTON_SPACING, takeButton, passButton, connectToServerButton);
+        buttonHorizontalBox.setAlignment(Pos.CENTER);
+        HBox.setHgrow(takeButton, Priority.ALWAYS);
+        HBox.setHgrow(passButton, Priority.ALWAYS);
+        HBox.setHgrow(connectToServerButton, Priority.ALWAYS);
+
+        takeButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        passButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        connectToServerButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setTop(buttonHorizontalBox);
+        borderPane.setCenter(canvas);
+
+        return new Scene(borderPane, MIN_WIDTH, MIN_HEIGHT);
     }
 }
