@@ -12,5 +12,5 @@ public interface APIClient {
 
     Card take();
     void pass();
-    State waitForMyTurn();
+    State nextEvent();
 }

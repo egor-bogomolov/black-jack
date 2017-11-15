@@ -5,25 +5,38 @@ import cards.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static game.GameSession.Turn.DEALER;
 import static game.GameSession.Turn.PLAYER;
 
 public class GameSession {
+    public enum Turn {
+        PLAYER,
+        DEALER
+    }
+
+    private Turn turn;
     private final Deck deck;
-    private final List<List<Card>> playersCards;
+    private final List<Card> playersCards;
+    private final List<Card> dealersCards;
     private boolean isFinished = false;
     private int playersPoints;
     private int dealersPoints;
 
     public GameSession() {
+        turn = PLAYER;
         deck = new Deck();
         playersCards = new ArrayList<>();
-        playersCards.add(deck.getCard());
-        playersCards.add(deck.getCard());
+        dealersCards = new ArrayList<>();
+        takeCard(PLAYER);
+        takeCard(DEALER);
+        takeCard(PLAYER);
+        takeCard(DEALER);
     }
 
+    public Turn getTurn() {
+        return turn;
+    }
 
     public List<Card> getCards(Turn turn) {
         if (turn == PLAYER)
@@ -43,10 +56,15 @@ public class GameSession {
         takeCard(PLAYER);
     }
 
-    private void takeCard(int id) {
+    private void takeCard(Turn turn) {
         Card card = deck.getCard();
-        playersCards.get(id).add(card);
-        playersPoints += card.getPoints(playersPoints);
+        if (turn == PLAYER) {
+            playersCards.add(card);
+            playersPoints = computePoints(playersCards);
+        } else {
+            dealersCards.add(card);
+            dealersPoints = computePoints(dealersCards);
+        }
     }
 
     public void playAsDealer() {
@@ -64,4 +82,25 @@ public class GameSession {
             return PLAYER;
         return DEALER;
     }
+
+    public static int computePoints(List<Card> cards) {
+        int aces = 0;
+        int points = 0;
+        for (Card card : cards) {
+            if (card.getValue() == Card.Value.ACE) {
+                aces++;
+            } else {
+                points += card.getPoints();
+            }
+        }
+        for (int i = 0; i < aces; i++) {
+            if (points + (aces - i - 1) + 11 > 21) {
+                points++;
+            } else {
+                points += 11;
+            }
+        }
+        return points;
+    }
+
 }
