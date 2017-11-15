@@ -2,34 +2,38 @@ package game;
 
 import cards.Card;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
 
     private APIClient server;
-    private boolean finished = false;
-    private List<Card> myCards = new ArrayList<>();
-    private int myPoints = 0;
+    private State boardState;
 
     public Client(APIClient server) {
         this.server = server;
     }
 
     public boolean hasFinished() {
-        return finished;
+        return boardState.hasFinished();
     }
 
-    public void stopPlaying() {
+    public void takeCard() throws IOException, ClassNotFoundException {
+        boardState = server.take();
+        if (boardState.getMyPoints() >= 21) {
+            stopPlayingAndWait();
+        }
+    }
+
+    public void stopPlayingAndWait() throws IOException, ClassNotFoundException {
         server.pass();
+        while(!hasFinished()) {
+            getStateUpdate();
+        }
     }
 
-    public void takeCard() {
-        Card card = server.take();
-        myCards.add(card);
-        myPoints = GameSession.computePoints(myCards);
+    private void getStateUpdate() throws IOException, ClassNotFoundException {
+        boardState = server.nextEvent();
     }
-
-
-
 }
