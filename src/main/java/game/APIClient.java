@@ -35,7 +35,7 @@ public class APIClient {
         return nextEvent();
     }
 
-    public State pass() throws IOException {
+    public State pass() throws IOException, ClassNotFoundException {
         os.writeObject(Operation.PASS);
         return nextEvent();
     }
