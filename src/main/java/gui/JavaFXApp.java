@@ -7,12 +7,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class JavaFXApp extends Application {
-    static final int MIN_WIDTH = 320;
-    static final int MIN_HEIGHT = 480;
+    private static final int MIN_WIDTH = 320;
+    private static final int MIN_HEIGHT = 480;
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private FieldPane field;
+    private FieldCanvas field;
     private Button takeButton, passButton;
 
     public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class JavaFXApp extends Application {
         primaryStage.setMinWidth(MIN_WIDTH);
         primaryStage.setMinHeight(MIN_HEIGHT);
 
-        field = new FieldPane(MIN_WIDTH, MIN_HEIGHT);
+        field = new FieldCanvas(MIN_WIDTH, MIN_HEIGHT);
 
         takeButton = new Button("TAKE");
         takeButton.setOnAction(e -> field.playerTurnTake());
