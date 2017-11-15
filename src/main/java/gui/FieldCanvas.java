@@ -6,7 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-class FieldPane extends Pane {
+class FieldCanvas extends Pane {
     private static final Image cards = new Image("cards.png");
     private static final double cardImageWidth = cards.getWidth() / 13;
     private static final double cardImageHeight = cards.getHeight() / 4;
@@ -15,7 +15,7 @@ class FieldPane extends Pane {
 
     private final Canvas canvas;
 
-    public FieldPane(double width, double height) {
+    FieldCanvas(double width, double height) {
         canvas = new Canvas(width, height);
         getChildren().add(canvas);
     }
