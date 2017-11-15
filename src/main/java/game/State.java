@@ -26,6 +26,10 @@ public final class State implements Serializable {
         return winner;
     }
 
+    public boolean isMyTurn() {
+        return currentTurn == myNumber;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof State)) return false;
