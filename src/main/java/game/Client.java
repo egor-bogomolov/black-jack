@@ -1,10 +1,6 @@
 package game;
 
-import cards.Card;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Client {
 
@@ -27,7 +23,7 @@ public class Client {
     }
 
     public void stopPlayingAndWait() throws IOException, ClassNotFoundException {
-        server.pass();
+        boardState = server.pass();
         while(!hasFinished()) {
             getStateUpdate();
         }
